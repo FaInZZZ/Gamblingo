@@ -1,51 +1,43 @@
-#include <cstdlib> 
-#include <ctime> 
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
+#include <Windows.h>
 
 int main()
 {
-	while (true){
-	srand(time(0));
-	int Money = 15;
-	int MoneyWon = 0;
-	int userMoneyInput = 0;
-	int Random = rand() % 10 + 1;
-	std::cout << "Get 50 Money you win get 0 Money your banned from pala pizza!" << "\n";
-	std::cout << "Current Money:"<< Money <<"\n";
+    srand(time(0));
+    int Money = 18;
+    int MoneyWon = 0;
+    int userMoneyInput = 0;
 
-	std::cin >> userMoneyInput;
+    while (true) {
+        int Random = rand() % 10 + 1;
+        std::cout << "Current Money: " << Money << "\n";
 
-	
+        std::cin >> userMoneyInput;
 
-	if (userMoneyInput == Random) {
-		MoneyWon = userMoneyInput * Random;
-		Money +=  MoneyWon;
-		std::cout << "You Won!" << "\n";
-	}
-	else  {
-		Money -= userMoneyInput;
-		std::cout << "Thanks for the money Nigger" << "\n";
-	};
+        if (userMoneyInput >= 11) {
+            std::cout << "The Maximum Amount To Gamble is 10!" << "\n";
+        }
+        else if (userMoneyInput == Random) {
+            MoneyWon = userMoneyInput * Random;
+            Money = Money + MoneyWon;
+            std::cout << "You Won!" << "\n";
+        }
+        else {
+            Money = Money - userMoneyInput;
+            std::cout << "You Lose!" << "\n";
+        }
 
-	std::cout << "Current Money:" << Money << "\n";
-
-
-	if (Money >= 50) {
-		std::cout << "You're A Professional Gambler! You Win!" << "\n";
-	}
-	else if (Money <= 0) {
-		std::cout << "You're shit at Gambling. You're a Loser." << "\n";
-	}
-
-	
-
-	
-
-	
-
-	
-	}
-	return 0;
-
+        if (Money >= 50) {
+            std::cout << "You're A Professional Gambler! You Win!" << "\n";
+            break;
+        }
+        else if (Money <= 0) {
+            std::cout << "You're bad at Gambling. You're a Loser." << "\n";
+            break;
+        }
+    }
+    system("pause");
+    return 0;
 }
-
