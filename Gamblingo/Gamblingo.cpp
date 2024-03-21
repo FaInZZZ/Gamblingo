@@ -11,15 +11,23 @@ int main()
     int userMoneyInput = 0;
 
     while (true) {
+       
+
         int Random = rand() % 10 + 1;
         std::cout << "Current Money: " << Money << "\n";
 
         std::cin >> userMoneyInput;
 
-        if (userMoneyInput >= 11) {
-            std::cout << "The Maximum Amount To Gamble is 10!" << "\n";
+        if (Money - userMoneyInput < 0) {
+            std::cout << "You don't have enough balance!\n";
+            continue; 
         }
-        else if (userMoneyInput == Random) {
+        else if (userMoneyInput >= 11) {
+            std::cout << "The maximum amount to gamble is 10!" << "\n";
+            continue;
+        }
+
+        if (userMoneyInput == Random) {
             MoneyWon = userMoneyInput * Random;
             Money = Money + MoneyWon;
             std::cout << "You Won!" << "\n";
