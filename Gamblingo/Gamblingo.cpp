@@ -6,46 +6,63 @@
 int main()
 {
     srand(time(0));
-    int Money = 18;
-    int MoneyWon = 0;
-    int userMoneyInput = 0;
-
-    while (true) {
+    int Money = 24;
+    std::cout << "Choose Game Mode\n";
 
 
-        int Random = rand() % 10 + 1;
-        std::cout << "Current Money: " << Money << "\n";
+    int choice;
+    std::cout << "1. 10 Time Money\n";
+    std::cin >> choice;
 
-        std::cin >> userMoneyInput;
+    switch (choice) {
+    case 0: std::cout << "Choose Game Mode:\n";
+    break;
 
-        if (Money - userMoneyInput < 0) {
-            std::cout << "You don't have enough balance!\n";
-            continue;
+    case 1: 
+        int MoneyWon = 0;
+        int userMoneyInput = 0;
+
+
+
+        while (true) {
+
+
+            int Random = rand() % 10 + 1;
+            std::cout << "Current Money: " << Money << "\n";
+
+            std::cin >> userMoneyInput;
+
+            if (Money - userMoneyInput < 0) {
+                std::cout << "You don't have enough balance!\n";
+                continue;
+            }
+            else if (userMoneyInput >= 11) {
+                std::cout << "The maximum amount to gamble is 10!" << "\n";
+                continue;
+            }
+
+            if (userMoneyInput == Random) {
+                MoneyWon = userMoneyInput * Random;
+                Money = Money + MoneyWon;
+                std::cout << "You Won!" << "\n";
+            }
+            else {
+                Money = Money - userMoneyInput;
+                std::cout << "You Lose!" << "\n";
+            }
+
+            if (Money >= 80) {
+                std::cout << "You're A Professional Gambler! You Win!" << "\n";
+                break;
+            }
+            else if (Money <= 0) {
+                std::cout << "You're bad at Gambling. You're a Loser." << "\n";
+                break;
+            }
         }
-        else if (userMoneyInput >= 11) {
-            std::cout << "The maximum amount to gamble is 10!" << "\n";
-            continue;
-        }
-
-        if (userMoneyInput == Random) {
-            MoneyWon = userMoneyInput * Random;
-            Money = Money + MoneyWon;
-            std::cout << "You Won!" << "\n";
-        }
-        else {
-            Money = Money - userMoneyInput;
-            std::cout << "You Lose!" << "\n";
-        }
-
-        if (Money >= 50) {
-            std::cout << "You're A Professional Gambler! You Win!" << "\n";
-            break;
-        }
-        else if (Money <= 0) {
-            std::cout << "You're bad at Gambling. You're a Loser." << "\n";
-            break;
-        }
+        system("pause");
     }
-    system("pause");
+    
+  
     return 0;
 }
