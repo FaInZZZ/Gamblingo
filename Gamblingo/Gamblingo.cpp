@@ -11,7 +11,7 @@ int main()
     int userMoneyInput = 0;
 
     while (true) {
-       
+
 
         int Random = rand() % 10 + 1;
         std::cout << "Current Money: " << Money << "\n";
@@ -20,7 +20,7 @@ int main()
 
         if (Money - userMoneyInput < 0) {
             std::cout << "You don't have enough balance!\n";
-            continue; 
+            continue;
         }
         else if (userMoneyInput >= 11) {
             std::cout << "The maximum amount to gamble is 10!" << "\n";
