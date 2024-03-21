@@ -1,32 +1,42 @@
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
-#include <Windows.h>
+#include <fstream>
+#include <string>
 
 int main()
 {
     srand(time(0));
-    int Money = 24;
-    std::cout << "Choose Game Mode\n";
 
+    int Money = 25;
+
+    std::ifstream file("Money.txt");
+    if (file.is_open()) {
+        file >> Money;
+        file.close();
+    }
+    else {
+        std::ofstream newFile("Money.txt");
+        newFile << Money;
+        newFile.close();
+    }
+
+    std::cout << "Choose Game Mode\n";
 
     int choice;
     std::cout << "1. 10 Time Money\n";
     std::cin >> choice;
 
     switch (choice) {
-    case 0: std::cout << "Choose Game Mode:\n";
-    break;
+    case 0:
+        std::cout << "Choose Game Mode:\n";
+        break;
 
-    case 1: 
+    case 1: {
         int MoneyWon = 0;
         int userMoneyInput = 0;
 
-
-
         while (true) {
-
-
             int Random = rand() % 10 + 1;
             std::cout << "Current Money: " << Money << "\n";
 
@@ -43,26 +53,36 @@ int main()
 
             if (userMoneyInput == Random) {
                 MoneyWon = userMoneyInput * Random;
-                Money = Money + MoneyWon;
+                Money += MoneyWon;
                 std::cout << "You Won!" << "\n";
             }
             else {
-                Money = Money - userMoneyInput;
+                Money -= userMoneyInput;
                 std::cout << "You Lose!" << "\n";
             }
 
-            if (Money >= 80) {
-                std::cout << "You're A Professional Gambler! You Win!" << "\n";
-                break;
-            }
-            else if (Money <= 0) {
-                std::cout << "You're bad at Gambling. You're a Loser." << "\n";
-                break;
-            }
         }
-        system("pause");
+        if (Money <= 0) {
+            std::cout << "Delete Money.txt To Try Again!" << "\n";
+            break;
+        }
+
+
+
+        std::ofstream file("Money.txt");
+        file << Money;
+        file.close();
     }
+          system("pause");
+    }
+
     
-  
     return 0;
-}
+};
+
+
+
+
+    
+
+
